@@ -3,6 +3,10 @@ package models.Players;
 import models.Teams.ClubTeam;
 import models.Teams.NationalTeam;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "players")
 public class Player {
 
     private int id;
@@ -23,6 +27,9 @@ public class Player {
         this.nationalEligibility = nationalEligibility;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -31,6 +38,7 @@ public class Player {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -39,6 +47,7 @@ public class Player {
         this.name = name;
     }
 
+    @Column(name = "age")
     public int getAge() {
         return age;
     }
@@ -47,6 +56,7 @@ public class Player {
         this.age = age;
     }
 
+    @Column(name = "transfer_value")
     public int getTransferValue() {
         return transferValue;
     }
@@ -55,6 +65,8 @@ public class Player {
         this.transferValue = transferValue;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "club_team_id")
     public ClubTeam getClubTeam() {
         return clubTeam;
     }
@@ -63,6 +75,8 @@ public class Player {
         this.clubTeam = clubTeam;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "national_team_id")
     public NationalTeam getNationalEligibility() {
         return nationalEligibility;
     }

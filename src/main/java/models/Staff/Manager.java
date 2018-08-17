@@ -2,6 +2,10 @@ package models.Staff;
 
 import models.Teams.Team;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "managers")
 public class Manager {
 
     private int id;
@@ -13,13 +17,15 @@ public class Manager {
     public Manager() {
     }
 
-    public Manager(String name, int age, String preferredFormation, Team team) {
+    public Manager(String name, int age, String preferredFormation) {
         this.name = name;
         this.age = age;
         this.preferredFormation = preferredFormation;
-        this.team = team;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -28,6 +34,7 @@ public class Manager {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -36,6 +43,7 @@ public class Manager {
         this.name = name;
     }
 
+    @Column(name = "age")
     public int getAge() {
         return age;
     }
@@ -44,6 +52,7 @@ public class Manager {
         this.age = age;
     }
 
+    @Column(name = "preferred_formation")
     public String getPreferredFormation() {
         return preferredFormation;
     }
@@ -52,6 +61,7 @@ public class Manager {
         this.preferredFormation = preferredFormation;
     }
 
+    @OneToOne(mappedBy = "manager", fetch = FetchType.LAZY)
     public Team getTeam() {
         return team;
     }

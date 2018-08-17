@@ -1,26 +1,29 @@
 package models.Teams;
 
-import models.Players.Player;
 import models.Staff.Manager;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "teams")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Team {
 
     private int id;
     private String name;
     private Manager manager;
-    private List<Player> squad;
 
     public Team() {
     }
 
-    public Team(String name) {
+    public Team(String name, Manager manager) {
         this.name = name;
-        this.squad = new ArrayList<Player>();
+        this.manager = manager;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -29,6 +32,7 @@ public abstract class Team {
         this.id = id;
     }
 
+    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -37,19 +41,13 @@ public abstract class Team {
         this.name = name;
     }
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "manager_id", nullable = false)
     public Manager getManager() {
         return manager;
     }
 
     public void setManager(Manager manager) {
         this.manager = manager;
-    }
-
-    public List<Player> getSquad() {
-        return squad;
-    }
-
-    public void setSquad(List<Player> squad) {
-        this.squad = squad;
     }
 }
