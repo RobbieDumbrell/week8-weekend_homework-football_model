@@ -109,6 +109,8 @@ public class Runner {
         DBKnockouts.addTeamTo(worldCup, brazil);
         DBKnockouts.addTeamTo(worldCup, egypt);
 
+        List<Team> faCupEntrants = DBKnockouts.getTeamsInKnockout(faCup);
+
         List<Manager> foundManagers = DBHelper.getAll(Manager.class);
         List<Player> foundPlayers = DBHelper.getAll(Player.class);
         List<Team> foundTeams = DBHelper.getAll(Team.class);
@@ -139,6 +141,14 @@ public class Runner {
         DBHelper.update(burnley);
 
         List<Team> premierLeagueStandings = DBLeagues.getLeagueStandings(premierLeague);
+
+        faCup.playGame(liverpool, manCity);
+        faCup.playGame(manUtd, burnley);
+
+        DBHelper.update(faCup);
+
+        List<Team> faCupFinalists = DBKnockouts.getTeamsInKnockout(faCup);
+
     }
 
 }

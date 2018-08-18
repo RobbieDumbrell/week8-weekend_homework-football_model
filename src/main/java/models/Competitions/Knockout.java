@@ -7,6 +7,7 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Entity
 @Table(name = "knockouts")
@@ -45,5 +46,29 @@ public class Knockout extends Competition {
     @Override
     public void removeTeam(Team removingTeam) {
         this.remainingTeams.remove(removingTeam);
+    }
+
+    public ArrayList<String> generateGameOutcomes(){
+        ArrayList<String> outcomes = new ArrayList<String>();
+        outcomes.add("Win");
+        outcomes.add("Lose");
+        return outcomes;
+    }
+
+    public String selectRandomOutcome(){
+        ArrayList<String> Outcomes = this.generateGameOutcomes();
+        Random randomizer = new Random();
+        String randomOutcome = Outcomes.get(randomizer.nextInt(Outcomes.size()));
+        return randomOutcome;
+    }
+
+    public void playGame(Team team1 ,Team team2) {
+        String team1Outcome = this.selectRandomOutcome();
+        if (team1Outcome.equals("Win")) {
+            this.remainingTeams.remove(team2);
+        }
+        if (team1Outcome.equals("Lose")) {
+            this.remainingTeams.remove(team1);
+        }
     }
 }
