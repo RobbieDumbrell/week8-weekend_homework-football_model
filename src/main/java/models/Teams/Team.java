@@ -19,6 +19,7 @@ public abstract class Team {
     private Manager manager;
     private List<Knockout> knockoutCompetitions;
     private League leagueCompetition;
+    private int leaguePoints;
 
 
     public Team() {
@@ -28,6 +29,7 @@ public abstract class Team {
         this.name = name;
         this.manager = manager;
         this.leagueCompetition = leagueCompetition;
+        this.leaguePoints = 0;
         this.knockoutCompetitions = new ArrayList<Knockout>();
     }
 
@@ -84,5 +86,18 @@ public abstract class Team {
 
     public void setKnockoutCompetitions(List<Knockout> knockoutCompetitions) {
         this.knockoutCompetitions = knockoutCompetitions;
+    }
+
+    @Column(name = "league_points")
+    public int getLeaguePoints() {
+        return leaguePoints;
+    }
+
+    public void setLeaguePoints(int leaguePoints) {
+        this.leaguePoints = leaguePoints;
+    }
+
+    public void addLeaguePoints(int leaguePoints){
+        this.leaguePoints += leaguePoints;
     }
 }

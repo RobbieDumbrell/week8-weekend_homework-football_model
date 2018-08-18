@@ -1,5 +1,6 @@
 import db.DBHelper;
 import db.DBKnockouts;
+import db.DBLeagues;
 import models.Competitions.Competition;
 import models.Competitions.Knockout;
 import models.Competitions.League;
@@ -9,7 +10,6 @@ import models.Teams.ClubTeam;
 import models.Teams.NationalTeam;
 import models.Teams.Team;
 
-import javax.persistence.ManyToMany;
 import java.util.List;
 
 public class Runner {
@@ -96,18 +96,18 @@ public class Runner {
         DBHelper.save(leagueCup);
         DBHelper.save(worldCup);
 
-        DBKnockouts.addTeamto(faCup, liverpool);
-        DBKnockouts.addTeamto(faCup, manCity);
-        DBKnockouts.addTeamto(faCup, manUtd);
-        DBKnockouts.addTeamto(faCup, burnley);
-        DBKnockouts.addTeamto(leagueCup, liverpool);
-        DBKnockouts.addTeamto(leagueCup, manCity);
-        DBKnockouts.addTeamto(leagueCup, manUtd);
-        DBKnockouts.addTeamto(leagueCup, burnley);
-        DBKnockouts.addTeamto(worldCup, england);
-        DBKnockouts.addTeamto(worldCup, belgium);
-        DBKnockouts.addTeamto(worldCup, brazil);
-        DBKnockouts.addTeamto(worldCup, egypt);
+        DBKnockouts.addTeamTo(faCup, liverpool);
+        DBKnockouts.addTeamTo(faCup, manCity);
+        DBKnockouts.addTeamTo(faCup, manUtd);
+        DBKnockouts.addTeamTo(faCup, burnley);
+        DBKnockouts.addTeamTo(leagueCup, liverpool);
+        DBKnockouts.addTeamTo(leagueCup, manCity);
+        DBKnockouts.addTeamTo(leagueCup, manUtd);
+        DBKnockouts.addTeamTo(leagueCup, burnley);
+        DBKnockouts.addTeamTo(worldCup, england);
+        DBKnockouts.addTeamTo(worldCup, belgium);
+        DBKnockouts.addTeamTo(worldCup, brazil);
+        DBKnockouts.addTeamTo(worldCup, egypt);
 
         List<Manager> foundManagers = DBHelper.getAll(Manager.class);
         List<Player> foundPlayers = DBHelper.getAll(Player.class);
@@ -118,6 +118,27 @@ public class Runner {
         List<League> foundLeagues = DBHelper.getAll(League.class);
         List<Knockout> foundKnockouts = DBHelper.getAll(Knockout.class);
 
+        premierLeague.playGame(liverpool, burnley);
+        premierLeague.playGame(liverpool, manUtd);
+        premierLeague.playGame(liverpool, manCity);
+        premierLeague.playGame(burnley, liverpool);
+        premierLeague.playGame(manUtd, liverpool);
+        premierLeague.playGame(manCity, liverpool);
+
+        premierLeague.playGame(burnley, manCity);
+        premierLeague.playGame(burnley, manUtd);
+        premierLeague.playGame(manCity, burnley);
+        premierLeague.playGame(manUtd, manCity);
+
+        premierLeague.playGame(manUtd, manCity);
+        premierLeague.playGame(manCity, manUtd);
+
+        DBHelper.update(liverpool);
+        DBHelper.update(manCity);
+        DBHelper.update(manUtd);
+        DBHelper.update(burnley);
+
+        List<Team> premierLeagueStandings = DBLeagues.getLeagueStandings(premierLeague);
     }
 
 }
