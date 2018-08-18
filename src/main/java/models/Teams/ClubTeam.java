@@ -1,5 +1,6 @@
 package models.Teams;
 
+import models.Competitions.League;
 import models.Players.Player;
 import models.Staff.Manager;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "clubs")
+@Table(name = "club_teams")
 public class ClubTeam extends Team {
 
     private List<Player> squad;
@@ -17,8 +18,8 @@ public class ClubTeam extends Team {
     public ClubTeam() {
     }
 
-    public ClubTeam(String name, Manager manager, int transferBudget) {
-        super(name, manager);
+    public ClubTeam(String name, Manager manager, League leagueCompetition, int transferBudget) {
+        super(name, manager, leagueCompetition);
         this.transferBudget = transferBudget;
         this.squad = new ArrayList<Player>();
     }
@@ -40,4 +41,5 @@ public class ClubTeam extends Team {
     public void setSquad(List<Player> squad) {
         this.squad = squad;
     }
+
 }

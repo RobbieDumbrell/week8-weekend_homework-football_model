@@ -1,5 +1,6 @@
 package models.Teams;
 
+import models.Competitions.League;
 import models.Players.Player;
 import models.Staff.Manager;
 
@@ -19,8 +20,8 @@ public class NationalTeam extends Team {
     public NationalTeam() {
     }
 
-    public NationalTeam(String name, Manager manager) {
-        super(name, manager);
+    public NationalTeam(String name, Manager manager, League leagueCompetition) {
+        super(name, manager, leagueCompetition);
         this.nationalPool = new ArrayList<Player>();
     }
 
