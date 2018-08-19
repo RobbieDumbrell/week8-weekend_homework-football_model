@@ -67,10 +67,10 @@ public class Knockout extends Competition {
 
             String team1Outcome = this.selectRandomOutcome();
             if (team1Outcome.equals("Win")) {
-                this.remainingTeams.remove(team2);
+                removeTeam(team2);
             }
             if (team1Outcome.equals("Lose")) {
-                this.remainingTeams.remove(team1);
+                removeTeam(team1);
             }
         }
     }
