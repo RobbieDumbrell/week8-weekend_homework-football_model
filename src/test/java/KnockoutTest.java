@@ -16,6 +16,7 @@ public class KnockoutTest {
     Knockout faCup;
     ClubTeam liverpool;
     ClubTeam burnley;
+    ClubTeam manUtd;
     Manager klopp;
     Manager dyche;
 
@@ -30,6 +31,8 @@ public class KnockoutTest {
         burnley = new ClubTeam("Burnley", dyche, championship, 50);
         faCup.addTeam(liverpool);
         faCup.addTeam(burnley);
+
+        manUtd = new ClubTeam("Manchester United", klopp, premierLeague, 100);
     }
 
     @Test
@@ -55,6 +58,12 @@ public class KnockoutTest {
     public void losingGameRemovesLoserFromCompetition(){
         faCup.playGame(liverpool, burnley);
         assertEquals(1, faCup.getRemainingTeams().size());
+    }
+
+    @Test
+    public void losingGameDoesNotRemoveAnyoneIfBothTeamsNotInCup(){
+        faCup.playGame(liverpool, manUtd);
+        assertEquals(2, faCup.getRemainingTeams().size());
     }
 
 

@@ -63,12 +63,15 @@ public class Knockout extends Competition {
     }
 
     public void playGame(Team team1 ,Team team2) {
-        String team1Outcome = this.selectRandomOutcome();
-        if (team1Outcome.equals("Win")) {
-            this.remainingTeams.remove(team2);
-        }
-        if (team1Outcome.equals("Lose")) {
-            this.remainingTeams.remove(team1);
+        if (this.remainingTeams.contains(team1) && this.remainingTeams.contains(team2)){
+
+            String team1Outcome = this.selectRandomOutcome();
+            if (team1Outcome.equals("Win")) {
+                this.remainingTeams.remove(team2);
+            }
+            if (team1Outcome.equals("Lose")) {
+                this.remainingTeams.remove(team1);
+            }
         }
     }
 }

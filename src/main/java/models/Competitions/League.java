@@ -59,17 +59,20 @@ public class League extends Competition{
     }
 
     public void playGame(Team team1 ,Team team2) {
-        String team1Outcome = this.selectRandomOutcome();
-        if (team1Outcome.equals("Win")) {
-            team1.addLeaguePoints(3);
-        }
-        if (team1Outcome.equals("Lose")) {
-            team2.addLeaguePoints(3);
-        }
-        if (team1Outcome.equals("Draw")) {
-            team1.addLeaguePoints(1);
-            team2.addLeaguePoints(1);
+        if (team1.getLeagueCompetition() == this && team2.getLeagueCompetition() == this){
+
+            String team1Outcome = this.selectRandomOutcome();
+            if (team1Outcome.equals("Win")) {
+                team1.addLeaguePoints(3);
+            }
+            if (team1Outcome.equals("Lose")) {
+                team2.addLeaguePoints(3);
+            }
+            if (team1Outcome.equals("Draw")) {
+                team1.addLeaguePoints(1);
+                team2.addLeaguePoints(1);
+            }
         }
     }
-    
+
 }

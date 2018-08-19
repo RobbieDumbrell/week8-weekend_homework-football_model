@@ -119,6 +119,8 @@ public class Runner {
         List<League> foundLeagues = DBHelper.getAll(League.class);
         List<Knockout> foundKnockouts = DBHelper.getAll(Knockout.class);
 
+
+
         premierLeague.playGame(liverpool, burnley);
         premierLeague.playGame(liverpool, manUtd);
         premierLeague.playGame(liverpool, manCity);

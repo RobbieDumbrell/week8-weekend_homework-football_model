@@ -11,6 +11,7 @@ import static junit.framework.Assert.assertEquals;
 public class LeagueTest {
 
     League premierLeague;
+    League championship;
     ClubTeam liverpool;
     ClubTeam burnley;
     Manager klopp;
@@ -19,10 +20,12 @@ public class LeagueTest {
     @Before
     public void before(){
         premierLeague = new League("Premier League", "Barclay's");
+        championship = new League("Championship", "Sky Bet");
         klopp = new Manager("Jurgen Klopp", 48, "4-3-3");
         dyche = new Manager("Sean Dyche", 52, "4-4-2");
         liverpool = new ClubTeam("Liverpool", klopp, premierLeague, 100);
         burnley = new ClubTeam("Burnley", dyche, premierLeague, 50);
+
     }
 
     @Test
@@ -47,6 +50,15 @@ public class LeagueTest {
         premierLeague.playGame(liverpool, burnley);
         int newTotalPoints = (liverpool.getLeaguePoints() + burnley.getLeaguePoints());
         assertEquals(true, newTotalPoints >= 2);
+    }
+
+    @Test
+    public void noPointsAssignedIfBothTeamsAreNotInLeague(){
+        int totalPoints = (liverpool.getLeaguePoints() + burnley.getLeaguePoints());
+        assertEquals(0, totalPoints);
+        championship.playGame(liverpool, burnley);
+        int newTotalPoints = (liverpool.getLeaguePoints() + burnley.getLeaguePoints());
+        assertEquals(false, newTotalPoints >= 2);
     }
 
 }
