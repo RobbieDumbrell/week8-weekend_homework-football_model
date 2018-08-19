@@ -1,6 +1,5 @@
 package models.Competitions;
 
-import db.DBHelper;
 import models.Teams.Team;
 
 import javax.persistence.Entity;
@@ -72,4 +71,5 @@ public class League extends Competition{
             team2.addLeaguePoints(1);
         }
     }
+    
 }

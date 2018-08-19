@@ -1,10 +1,9 @@
-import db.DBHelper;
-import db.DBKnockouts;
-import db.DBLeagues;
+import db.*;
 import models.Competitions.Competition;
 import models.Competitions.Knockout;
 import models.Competitions.League;
 import models.Players.Player;
+import models.Players.PreferredPosition;
 import models.Staff.Manager;
 import models.Teams.ClubTeam;
 import models.Teams.NationalTeam;
@@ -62,18 +61,18 @@ public class Runner {
         DBHelper.save(manCity);
         DBHelper.save(burnley);
 
-        Player salah = new Player("Mohamed Salah", 26, 65, liverpool, egypt);
-        Player firmino = new Player("Roberto Firmino", 25, 50, liverpool, brazil);
-        Player sterling = new Player("Raheem Stirling", 24, 40, manCity, england);
-        Player deBruyne = new Player("Kevin De Bruyne", 26, 70, manCity, belgium);
-        Player lukaku = new Player("Romelu Lukaku", 25, 55, manUtd, belgium);
-        Player jesus = new Player("Gabriel Jesus", 21, 30, manCity, brazil);
-        Player rashford = new Player("Marcus Rashford", 20, 35, manUtd, england);
-        Player fred = new Player("Fred", 27, 25, manUtd, brazil);
-        Player henderson = new Player("Jordan Henderson", 27, 15, liverpool, england);
-        Player tarkowski = new Player("James Tarkowski", 24, 5, burnley, england);
-        Player mee = new Player("Ben Mee", 28, 10, burnley, england);
-        Player cork = new Player("Jack Cork", 29, 5, burnley, england);
+        Player salah = new Player("Mohamed Salah", 26, PreferredPosition.FORWARD, 65, liverpool, egypt);
+        Player firmino = new Player("Roberto Firmino", 25, PreferredPosition.FORWARD, 50, liverpool, brazil);
+        Player sterling = new Player("Raheem Stirling", 24, PreferredPosition.FORWARD, 40, manCity, england);
+        Player deBruyne = new Player("Kevin De Bruyne", 26, PreferredPosition.MIDFIELDER, 70, manCity, belgium);
+        Player lukaku = new Player("Romelu Lukaku", 25, PreferredPosition.FORWARD, 55, manUtd, belgium);
+        Player jesus = new Player("Gabriel Jesus", 21, PreferredPosition.FORWARD, 30, manCity, brazil);
+        Player rashford = new Player("Marcus Rashford", 20, PreferredPosition.FORWARD, 35, manUtd, england);
+        Player fred = new Player("Fred", 27, PreferredPosition.MIDFIELDER, 25, manUtd, brazil);
+        Player henderson = new Player("Jordan Henderson", 27, PreferredPosition.MIDFIELDER, 15, liverpool, england);
+        Player tarkowski = new Player("James Tarkowski", 24, PreferredPosition.DEFENDER, 5, burnley, england);
+        Player mee = new Player("Ben Mee", 28, PreferredPosition.DEFENDER, 10, burnley, england);
+        Player cork = new Player("Jack Cork", 29, PreferredPosition.MIDFIELDER, 5, burnley, england);
 
         DBHelper.save(salah);
         DBHelper.save(firmino);
@@ -148,6 +147,18 @@ public class Runner {
         DBHelper.update(faCup);
 
         List<Team> faCupFinalists = DBKnockouts.getTeamsInKnockout(faCup);
+
+        DBClubTeam.teamBuysPlayer(liverpool, deBruyne);
+        List<Player> manCityPlayers = DBClubTeam.getPlayers(manCity);
+        List<Player> liverpoolPlayers = DBClubTeam.getPlayers(liverpool);
+
+        ClubTeam deBruyneClub = DBPlayer.getClub(deBruyne);
+        NationalTeam deBruyneNation = DBPlayer.getNationalTeam(deBruyne);
+
+        List<Player> englandPlayers = DBNationalTeam.getPlayers(england);
+        List<Player> belgiumPlayers = DBNationalTeam.getPlayers(belgium);
+
+        List<Player> allForwards = DBPlayer.getPlayersOfPosition(PreferredPosition.FORWARD);
 
     }
 

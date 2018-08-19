@@ -12,6 +12,7 @@ public class Player {
     private int id;
     private String name;
     private int age;
+    private PreferredPosition preferredPosition;
     private int transferValue;
     private ClubTeam clubTeam;
     private NationalTeam nationalEligibility;
@@ -19,9 +20,10 @@ public class Player {
     public Player() {
     }
 
-    public Player(String name, int age, int transferValue, ClubTeam clubTeam, NationalTeam nationalEligibility) {
+    public Player(String name, int age, PreferredPosition preferredPosition, int transferValue, ClubTeam clubTeam, NationalTeam nationalEligibility) {
         this.name = name;
         this.age = age;
+        this.preferredPosition = preferredPosition;
         this.transferValue = transferValue;
         this.clubTeam = clubTeam;
         this.nationalEligibility = nationalEligibility;
@@ -54,6 +56,16 @@ public class Player {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "preferred_position")
+    public PreferredPosition getPreferredPosition() {
+        return preferredPosition;
+    }
+
+    public void setPreferredPosition(PreferredPosition preferredPosition) {
+        this.preferredPosition = preferredPosition;
     }
 
     @Column(name = "transfer_value")

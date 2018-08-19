@@ -42,4 +42,26 @@ public class ClubTeam extends Team {
         this.squad = squad;
     }
 
+    public boolean canBuyPlayer(Player player){
+        if (this.transferBudget >= player.getTransferValue()){
+            return true;
+        }
+        return false;
+    }
+
+    public void changeTransferBudget(int amount){
+        this.transferBudget += amount;
+    }
+
+    public void buyPlayer(Player player){
+        if (this.canBuyPlayer(player) && player.getClubTeam() != this){
+            player.getClubTeam().changeTransferBudget(player.getTransferValue());
+            player.setClubTeam(this);
+            this.changeTransferBudget((player.getTransferValue() * -1));
+        }
+    }
+
+
+
+
 }
